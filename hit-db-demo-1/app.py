@@ -20,6 +20,14 @@ class Flipkart:
             self.login()
         else:
             sys.exit(1000)
+
+    def login_menu(self):
+        input("""
+        1. Enter 1 to see profile
+        2. Enter 2 to edit profile
+        3. Enter 3 to delete profile
+        4. Enter 4 to logout
+        """)
     
     def register(self):
         name = input("Enter the name: ")
@@ -33,5 +41,18 @@ class Flipkart:
         else:
             print("Registration failed")
         self.menu()
+
+    def login(self):
+        email = input("Enter email: ")
+        password = input("Enter password: ")
+
+        data = self.db.search(email,password)
+
+        if len(data) == 0:
+            print("Incorrect email/password")
+            self.login()
+        else:
+            print("Hello", data[0][1])
+            self.login_menu()
 
 obj = Flipkart()
