@@ -13,4 +13,13 @@ class DBhelper:
             
         else:
             print("Connected to database")
-            
+
+    def register(self,name,email,password):
+        try:
+            self.mycursor.execute("""
+            INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES (NULL, '{}', '{}', '{}');""".format(name,email,password))
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
